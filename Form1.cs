@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Net;
+using System.Drawing;
 
 namespace IPAddressChecker
 {
@@ -15,6 +16,15 @@ namespace IPAddressChecker
         {
             // IPアドレスを取得してテキストボックスへ表示
             textBox1.Text = get_ip_address();
+
+            // このフォームを常に手前または解除します。
+            TopMost = checkBox1.Checked;
+
+            // 通知領域アイコンにWindows規定アイコンを設定する
+            notifyIcon1.Icon = SystemIcons.Application;
+
+            // タスクバーに表示しない
+            ShowInTaskbar = false;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -54,6 +64,20 @@ namespace IPAddressChecker
             }
 
             return ip_adr;
+        }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 通知領域アイコンを右クリック
+            // 終了
+            Application.Exit();
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            // 通知領域アイコンをクリック
+            // Formをアクティブにする
+            Activate();
         }
     }
 }
